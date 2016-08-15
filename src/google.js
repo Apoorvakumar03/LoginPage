@@ -45,7 +45,7 @@ class GoogleLogin extends Component {
         scope,
       };
       window.gapi.load('auth2', () => {
-        window.gapi.auth2.init(params);
+        !(window.gapi.auth2.getAuthInstance()) && window.gapi.auth2.init(params);
       });
     });
   }
