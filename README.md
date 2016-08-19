@@ -1,6 +1,6 @@
 # React Google Login
 
-> A Google oAUth Sign-in / Log-in Component for React
+> A Google oAUth Sign-in / Log-in Component for React 
 
 
 ## Install
@@ -33,7 +33,7 @@ ReactDOM.render(
 
 If offline is false callback will return the GoogleAuth object.
 
-If offline is true callback will return the offline token for use on your server.
+If offline is true callback will return the offline token for use on your server. 
 
 ## Parameters
 
@@ -84,6 +84,6 @@ npm run test:watch
 npm run bundle
 ```
 
-##### Checkout keppelen's [React Facebook Login](https://github.com/keppelen/react-facebook-login) 
+##### Checkout keppelen's [React Facebook Login](https://github.com/keppelen/react-facebook-login)
 
 ### Follow me on Twitter: [@anthonyjgrove](https://twitter.com/anthonyjgrove)
