@@ -23,7 +23,8 @@ const responseGoogle = (response) => {
 ReactDOM.render(
   <GoogleLogin
     clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-    buttonText="Login"
+    loginText="Login"
+    loginText="Logout"
     callback={responseGoogle} />,
   document.getElementById('googleButton')
 );
@@ -42,7 +43,8 @@ If offline is true callback will return the offline token for use on your server
 |     scope    |  string  |             profile email            |
 |   callback   | function |               REQUIRED               |
 |    offline   |  boolean |                 false                |
-|   buttonText |  string  |             Login with Google        |
+|   loginText  |  string  |             Login with Google        |
+|   logoutText |  string  |             Logout with Google       |
 |   cssClass   |  string  |                   -                  |
 |   loginHint  |  string  |                   -                  |
 | redirectUri  |  string  |              postmessage             |
@@ -82,6 +84,6 @@ npm run test:watch
 npm run bundle
 ```
 
-##### Checkout keppelen's [React Facebook Login](https://github.com/keppelen/react-facebook-login) 
+##### Checkout keppelen's [React Facebook Login](https://github.com/keppelen/react-facebook-login)
 
 ### Follow me on Twitter: [@anthonyjgrove](https://twitter.com/anthonyjgrove)

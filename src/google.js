@@ -4,7 +4,8 @@ class GoogleLogin extends Component {
   static propTypes = {
     callback: PropTypes.func.isRequired,
     clientId: PropTypes.string.isRequired,
-    buttonText: PropTypes.string,
+    loginText: PropTypes.string,
+    logoutText: PropTypes.string,
     offline: PropTypes.bool,
     scope: PropTypes.string,
     cssClass: PropTypes.string,
@@ -15,7 +16,8 @@ class GoogleLogin extends Component {
   };
 
   static defaultProps = {
-    buttonText: 'Login with Google',
+    loginText: 'Login with Google',
+    logoutText: 'Logout with Google',
     scope: 'profile email',
     redirectUri: 'postmessage',
     cookiePolicy: 'single_host_origin',
@@ -23,7 +25,12 @@ class GoogleLogin extends Component {
 
   constructor(props) {
     super(props);
-    this.onBtnClick = this.onBtnClick.bind(this);
+    this.onLoginClick = this.onLoginClick.bind(this);
+    this.onLogoutClick = this.onLogoutClick.bind(this);
+    this.state = {
+      auth2: {},
+      signedIn: false,
+    };
   }
 
   componentDidMount() {
@@ -45,17 +52,34 @@ class GoogleLogin extends Component {
         scope,
       };
       window.gapi.load('auth2', () => {
-        window.gapi.auth2.init(params);
+        window.gapi.auth2.init(params)
+          .then(() => {
+            const auth = window.gapi.auth2.getAuthInstance();
+            const user = auth.currentUser.get();
+            const loggedin = auth.isSignedIn.get();
+
+            if (loggedin && !user.hasGrantedScopes(scope)) {
+              auth.currentUser.get().grant({ scope });
+            }
+
+            auth.isSignedIn.listen((event) => this.setState({ signedIn: event }));
+
+            this.setState({
+              auth2: auth,
+              signedIn: loggedin,
+            });
+          });
       });
     });
   }
 
-  onBtnClick() {
-    const auth2 = window.gapi.auth2.getAuthInstance();
+  onLoginClick() {
+    const { auth2 } = this.state;
     const { offline, redirectUri, callback } = this.props;
+
     if (offline) {
       const options = {
-        'redirect_uri': redirectUri,
+        redirect_uri: redirectUri,
       };
       auth2.grantOfflineAccess(options)
         .then((data) => {
@@ -67,6 +91,13 @@ class GoogleLogin extends Component {
           callback(response);
         });
     }
+  }
+
+  onLogoutClick() {
+    const { auth2 } = this.state;
+    auth2.signOut().then(() => {
+      this.setState({ signedIn: false });
+    });
   }
 
   render() {
@@ -83,15 +114,24 @@ class GoogleLogin extends Component {
       fontWeight: 'bold',
       fontFamily: 'Roboto',
     };
-    const { cssClass, buttonText, children } = this.props;
+    const { cssClass, loginText, logoutText, children } = this.props;
+    const { signedIn } = this.state;
     return (
-      <button
-        className={ cssClass }
-        onClick={ this.onBtnClick }
-        style={ cssClass ? {} : style }
-      >
-        { children ? children : buttonText }
-      </button>
+      !signedIn
+        ? <button
+          className={cssClass}
+          onClick={this.onLoginClick}
+          style={cssClass ? {} : style}
+        >
+          { children ? [children, loginText] : loginText }
+        </button>
+        : <button
+          className={cssClass}
+          onClick={this.onLogoutClick}
+          style={cssClass ? {} : style}
+        >
+          { children ? [children, logoutText] : logoutText }
+        </button>
     );
   }
 }
