@@ -36,13 +36,13 @@ describe('Google Login', () => {
 
     describe('With custom text and default props', () => {
         
-        const buttonText ='buttonText'; 
+        const loginText ='loginText'; 
         
         beforeEach(() => {
             propsObj = {
                 callback(response) {},
                 clientId: '658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com',
-                buttonText
+                loginText
             };
             component = renderComponent(GoogleLogin, propsObj);
         });
@@ -52,7 +52,7 @@ describe('Google Login', () => {
         });
         
         it('displays correct button text', () => {
-            expect(component).to.have.text(buttonText);
+            expect(component).to.have.text(loginText);
         });
 
         it('does not have a class attr', () => {
@@ -99,13 +99,13 @@ describe('Google Login', () => {
     describe('With children, custom text, and default props', () => {
         
         const children = 'test';
-        const buttonText ='buttonText'; 
+        const loginText ='loginText'; 
 
         beforeEach(() => {
             propsObj = {
                 callback(response) {},
                 clientId: '658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com',
-                buttonText
+                loginText
             };
             component = renderComponent(GoogleLogin, propsObj, children);
         });
@@ -115,7 +115,7 @@ describe('Google Login', () => {
         });
 
         it('displays children text', () => {
-            expect(component).to.have.text(children);
+            expect(component).to.have.text(children+loginText);
         });
         
         it('does not display default text', () => {
@@ -123,7 +123,7 @@ describe('Google Login', () => {
         });
         
         it('does not display custom text', () => {
-            expect(component).to.not.have.text(buttonText);
+            expect(component).to.not.have.text(loginText);
         });
         
         it('does not have a class attr', () => {

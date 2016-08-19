@@ -1,6 +1,6 @@
 # React Google Login
 
-> A Google oAUth Sign-in / Log-in Component for React 
+> A Google oAUth Sign-in / Log-in Component for React
 
 
 ## Install
@@ -23,7 +23,8 @@ const responseGoogle = (response) => {
 ReactDOM.render(
   <GoogleLogin
     clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-    buttonText="Login"
+    loginText="Login"
+    loginText="Logout"
     callback={responseGoogle} />,
   document.getElementById('googleButton')
 );
@@ -32,7 +33,7 @@ ReactDOM.render(
 
 If offline is false callback will return the GoogleAuth object.
 
-If offline is true callback will return the offline token for use on your server. 
+If offline is true callback will return the offline token for use on your server.
 
 ## Parameters
 
@@ -42,7 +43,8 @@ If offline is true callback will return the offline token for use on your server
 |     scope    |  string  |             profile email            |
 |   callback   | function |               REQUIRED               |
 |    offline   |  boolean |                 false                |
-|   buttonText |  string  |             Login with Google        |
+|   loginText  |  string  |             Login with Google        |
+|   logoutText |  string  |             Logout with Google       |
 |   cssClass   |  string  |                   -                  |
 |   loginHint  |  string  |                   -                  |
 | redirectUri  |  string  |              postmessage             |
