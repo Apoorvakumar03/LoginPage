@@ -114,7 +114,7 @@ class GoogleLogin extends Component {
       fontWeight: 'bold',
       fontFamily: 'Roboto',
     };
-    const { cssClass, defaultLoginText, defaultLogoutText, loginText, logoutText, children } = this.props;
+    const { cssClass, loginText, logoutText, children } = this.props;
     const { signedIn } = this.state;
     return (
       !signedIn
