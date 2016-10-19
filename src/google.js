@@ -32,7 +32,7 @@ class GoogleLogin extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const { clientId, scope, cookiePolicy, loginHint, hostedDomain } = this.props;
     ((d, s, id, cb) => {
       const element = d.getElementsByTagName(s)[0];
@@ -57,12 +57,19 @@ class GoogleLogin extends Component {
         });
         if (!window.gapi.auth2.getAuthInstance()) {
           window.gapi.auth2.init(params);
+          this.signIn();
+        } else {
+          this.signIn();
         }
       });
     });
   }
 
   onBtnClick() {
+    this.signIn();
+  }
+
+  signIn() {
     const auth2 = window.gapi.auth2.getAuthInstance();
     const { offline, redirectUri, onSuccess, onFailure } = this.props;
     if (offline) {
