@@ -15,6 +15,7 @@ class GoogleLogin extends Component {
     hostedDomain: PropTypes.string,
     children: React.PropTypes.node,
     style: React.PropTypes.object,
+    autoLoad: React.PropTypes.bool,
   };
 
   static defaultProps = {
@@ -33,7 +34,7 @@ class GoogleLogin extends Component {
   }
 
   componentDidMount() {
-    const { clientId, scope, cookiePolicy, loginHint, hostedDomain } = this.props;
+    const { clientId, scope, cookiePolicy, loginHint, hostedDomain, autoLoad } = this.props;
     ((d, s, id, cb) => {
       const element = d.getElementsByTagName(s)[0];
       const fjs = element;
@@ -57,8 +58,8 @@ class GoogleLogin extends Component {
         });
         if (!window.gapi.auth2.getAuthInstance()) {
           window.gapi.auth2.init(params);
-          this.signIn();
-        } else {
+        }
+        if (autoLoad) {
           this.signIn();
         }
       });
