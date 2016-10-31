@@ -32,7 +32,7 @@ class GoogleLogin extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { clientId, scope, cookiePolicy, loginHint, hostedDomain } = this.props;
     ((d, s, id, cb) => {
       const element = d.getElementsByTagName(s)[0];
