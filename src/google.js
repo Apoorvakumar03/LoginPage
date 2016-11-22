@@ -19,6 +19,7 @@ class GoogleLogin extends Component {
     approvalPrompt: PropTypes.string,
     tag: PropTypes.string,
     autoLoad: React.PropTypes.bool,
+    signInOptions: React.PropTypes.object,
   };
 
   static defaultProps = {
@@ -74,7 +75,7 @@ class GoogleLogin extends Component {
   signIn() {
     if (!this.state.disable) {
       const auth2 = window.gapi.auth2.getAuthInstance();
-      const { offline, redirectUri, onSuccess, onRequest, onFailure, approvalPrompt } = this.props;
+      const { offline, redirectUri, onSuccess, onRequest, onFailure, approvalPrompt, signInOptions } = this.props;
       onRequest();
       if (offline) {
         const options = {
@@ -88,7 +89,7 @@ class GoogleLogin extends Component {
             onFailure(err);
           });
       } else {
-        auth2.signIn()
+        auth2.signIn(signInOptions)
           .then(res => {
             /*
               offer renamed response keys to names that match use
