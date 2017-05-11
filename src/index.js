@@ -52,11 +52,12 @@ class GoogleLogin extends Component {
     }
     if (!this.state.disabled) {
       const auth2 = window.gapi.auth2.getAuthInstance();
-      const { offline, redirectUri, onSuccess, onRequest, fetchBasicProfile, onFailure, prompt, scope, responseType } = this.props;
+      const { offline, redirectUri, onSuccess, onRequest, fetchBasicProfile, onFailure, prompt, approvalPrompt, scope, responseType } = this.props;
       const options = {
         response_type: responseType,
         redirect_uri: redirectUri,
         fetch_basic_profile: fetchBasicProfile,
+        approval_prompt: approvalPrompt,
         prompt,
         scope,
       };
@@ -155,6 +156,7 @@ GoogleLogin.propTypes = {
   disabledStyle: React.PropTypes.object,
   fetchBasicProfile: PropTypes.bool,
   prompt: PropTypes.string,
+  approvalPrompt: PropTypes.string,
   tag: PropTypes.string,
   autoLoad: PropTypes.bool,
   disabled: PropTypes.bool,
@@ -169,6 +171,7 @@ GoogleLogin.defaultProps = {
   scope: 'profile email',
   responseType: 'permission',
   prompt: '',
+  approvalPrompt: '',
   cookiePolicy: 'single_host_origin',
   fetchBasicProfile: true,
   uxMode: 'popup',
