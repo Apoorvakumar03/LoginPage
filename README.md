@@ -58,6 +58,7 @@ If you use the hostedDomain param, make sure to validate the id_token (a JSON we
 | disabledStyle|  object  |                   -                  |                  |
 |   loginHint  |  string  |                   -                  |                  |
 |    prompt    |  string  |                   -                  |                  |
+| approvalPrompt |  string  |                   -                  |                  |
 |     tag      |  string  |                button                |  sets element tag (div, a, span, etc     |
 |   autoLoad   |  boolean |                 false                |                  |
 | fetchBasicProfile | boolean | true                            |                  |
