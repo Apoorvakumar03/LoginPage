@@ -75,8 +75,8 @@ declare namespace ReactGoogleLogin {
     readonly disabled?: boolean;
   }
 
-  export default class GoogleLogin extends Component<GoogleLoginProps, {}> {
+  export class GoogleLogin extends Component<GoogleLoginProps, {}> {
   }
 }
 
-export = ReactGoogleLogin;
+export = ReactGoogleLogin.GoogleLogin;
