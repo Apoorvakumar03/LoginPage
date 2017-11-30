@@ -55,8 +55,9 @@ class GoogleLogin extends Component {
         });
     });
     else {
+      this.setState({ disabled: false });
       if (isSignedIn && gapi.auth2.getAuthInstance().currentUser)
-        this._handleSigninSuccess(gapi.auth2.getAuthInstance().currentUser.get())
+        this._handleSigninSuccess(gapi.auth2.getAuthInstance().currentUser.get());
     }
   }
   signIn(e) {
@@ -95,6 +96,9 @@ class GoogleLogin extends Component {
     */
     const basicProfile = res.getBasicProfile();
     const authResponse = res.getAuthResponse(true);
+    if (!authResponse || !basicProfile)
+      return
+
     res.googleId = basicProfile.getId();
     res.tokenObj = authResponse;
     res.tokenId = authResponse.id_token;
