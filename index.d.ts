@@ -65,7 +65,6 @@ export interface GoogleLoginProps {
   readonly className?: string,
   readonly redirectUri?: string,
   readonly cookiePolicy?: string,
-  readonly loginHint?: string,
   readonly hostedDomain?: string,
   readonly prompt?: string,
   readonly responseType?: string,

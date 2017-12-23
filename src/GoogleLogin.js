@@ -11,7 +11,7 @@ class GoogleLogin extends Component {
     }
   }
   componentDidMount() {
-    const { clientId, cookiePolicy, loginHint, hostedDomain, autoLoad, isSignedIn, fetchBasicProfile, redirectUri, discoveryDocs, onFailure, uxMode, scope, responseType } = this.props
+    const { clientId, cookiePolicy, hostedDomain, autoLoad, isSignedIn, fetchBasicProfile, redirectUri, onFailure, uxMode, scope, responseType } = this.props
       ; ((d, s, id, cb) => {
         const element = d.getElementsByTagName(s)[0]
         const fjs = element
@@ -25,13 +25,11 @@ class GoogleLogin extends Component {
         const params = {
           client_id: clientId,
           cookie_policy: cookiePolicy,
-          login_hint: loginHint,
-          hosted_domain: hostedDomain,
+          scope,
           fetch_basic_profile: fetchBasicProfile,
-          discoveryDocs,
+          hosted_domain: hostedDomain,
           ux_mode: uxMode,
           redirect_uri: redirectUri,
-          scope
         }
 
         if (responseType === 'code') {
@@ -158,7 +156,6 @@ GoogleLogin.propTypes = {
   className: PropTypes.string,
   redirectUri: PropTypes.string,
   cookiePolicy: PropTypes.string,
-  loginHint: PropTypes.string,
   hostedDomain: PropTypes.string,
   children: PropTypes.node,
   style: PropTypes.object,
@@ -168,7 +165,6 @@ GoogleLogin.propTypes = {
   tag: PropTypes.string,
   autoLoad: PropTypes.bool,
   disabled: PropTypes.bool,
-  discoveryDocs: PropTypes.array,
   uxMode: PropTypes.string,
   isSignedIn: PropTypes.bool,
   responseType: PropTypes.string,
