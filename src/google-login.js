@@ -8,11 +8,13 @@ class GoogleLogin extends Component {
   constructor(props) {
     super(props)
     this.signIn = this.signIn.bind(this)
+    this.reloadAuthToken = this.reloadAuthToken.bind(this)
     this.enableButton = this.enableButton.bind(this)
     this.state = {
       disabled: true,
       hovered: false,
-      active: false
+      active: false,
+      googleUser: null
     }
   }
   componentDidMount() {
@@ -31,6 +33,7 @@ class GoogleLogin extends Component {
       scope,
       accessType,
       responseType,
+      authReloadInterval,
       jsSrc
     } = this.props
     ;((d, s, id, cb) => {
@@ -81,6 +84,10 @@ class GoogleLogin extends Component {
         }
       })
     })
+
+    window.setInterval(() => {
+      this.reloadAuthToken()
+    }, authReloadInterval)
   }
   componentWillUnmount() {
     this.enableButton = () => {}
@@ -108,6 +115,22 @@ class GoogleLogin extends Component {
       }
     }
   }
+  reloadAuthToken() {
+    if (!this.state.googleUser || this.state.googleUser === null) {
+      this.signIn()
+
+      return
+    }
+    this.state.googleUser.reloadAuthResponse().then(
+      authResponse => {
+        this.props.onAuthReload(authResponse)
+      },
+      failResponse => {
+        this.props.onFailure(failResponse)
+      }
+    )
+  }
+
   handleSigninSuccess(res) {
     /*
       offer renamed response keys to names that match use
@@ -126,6 +149,7 @@ class GoogleLogin extends Component {
       givenName: basicProfile.getGivenName(),
       familyName: basicProfile.getFamilyName()
     }
+    this.setState({ googleUser: res })
     this.props.onSuccess(res)
   }
 
@@ -209,6 +233,8 @@ class GoogleLogin extends Component {
 
 GoogleLogin.propTypes = {
   onSuccess: PropTypes.func.isRequired,
+  onAuthReload: PropTypes.func,
+  authReloadInterval: PropTypes.number,
   onFailure: PropTypes.func.isRequired,
   clientId: PropTypes.string.isRequired,
   jsSrc: PropTypes.string,
@@ -255,6 +281,8 @@ GoogleLogin.defaultProps = {
   icon: true,
   theme: 'light',
   onRequest: () => {},
+  onAuthReload: () => {},
+  authReloadInterval: 2147483647,
   jsSrc: 'https://apis.google.com/js/api.js'
 }
 

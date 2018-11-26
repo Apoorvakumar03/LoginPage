@@ -57,6 +57,8 @@ export interface GoogleLoginResponseOffline {
 
 export interface GoogleLoginProps {
   readonly onSuccess: (response: GoogleLoginResponse | GoogleLoginResponseOffline) => void,
+  readonly onAuthReload?: (response: GoogleLoginResponse | GoogleLoginResponseOffline) => void,
+  readonly authReloadInterval?: number,
   readonly onFailure: (error: any) => void,
   readonly clientId: string,
   readonly jsSrc?: string,
@@ -86,6 +88,7 @@ export interface GoogleLoginProps {
 
 export class GoogleLogin extends Component<GoogleLoginProps, {}> {
   public signIn(e?: Event): void;
+  public reloadAuthToken(): void;
 }
 
 export interface GoogleLogoutProps {
