@@ -13,8 +13,7 @@ class GoogleLogin extends Component {
     this.state = {
       disabled: true,
       hovered: false,
-      active: false,
-      googleUser: null
+      active: false
     }
   }
   componentDidMount() {
@@ -116,19 +115,23 @@ class GoogleLogin extends Component {
     }
   }
   reloadAuthToken() {
-    if (!this.state.googleUser || this.state.googleUser === null) {
+    const auth2 = window.gapi.auth2.getAuthInstance()
+    if (!this.props.isSignedIn || !auth2.isSignedIn.get()) {
       this.signIn()
 
       return
     }
-    this.state.googleUser.reloadAuthResponse().then(
-      authResponse => {
-        this.props.onAuthReload(authResponse)
-      },
-      failResponse => {
-        this.props.onFailure(failResponse)
-      }
-    )
+    auth2.currentUser
+      .get()
+      .reloadAuthResponse()
+      .then(
+        authResponse => {
+          this.props.onAuthReload(authResponse)
+        },
+        failResponse => {
+          this.props.onFailure(failResponse)
+        }
+      )
   }
 
   handleSigninSuccess(res) {
@@ -149,7 +152,6 @@ class GoogleLogin extends Component {
       givenName: basicProfile.getGivenName(),
       familyName: basicProfile.getFamilyName()
     }
-    this.setState({ googleUser: res })
     this.props.onSuccess(res)
   }
 
