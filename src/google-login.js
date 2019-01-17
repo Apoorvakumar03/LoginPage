@@ -125,11 +125,11 @@ class GoogleLogin extends Component {
       .get()
       .reloadAuthResponse()
       .then(
-        authResponse => {
-          this.props.onAuthReload(authResponse)
+        successResponse => {
+          this.props.onAuthReloadSuccess(successResponse)
         },
         failResponse => {
-          this.props.onFailure(failResponse)
+          this.props.onAuthReloadFailure(failResponse)
         }
       )
   }
@@ -235,7 +235,8 @@ class GoogleLogin extends Component {
 
 GoogleLogin.propTypes = {
   onSuccess: PropTypes.func.isRequired,
-  onAuthReload: PropTypes.func,
+  onAuthReloadSuccess: PropTypes.func,
+  onAuthReloadFailure: PropTypes.func,
   authReloadInterval: PropTypes.number,
   onFailure: PropTypes.func.isRequired,
   clientId: PropTypes.string.isRequired,
@@ -283,7 +284,8 @@ GoogleLogin.defaultProps = {
   icon: true,
   theme: 'light',
   onRequest: () => {},
-  onAuthReload: () => {},
+  onAuthReloadSuccess: () => {},
+  onAuthReloadFailure: () => {},
   authReloadInterval: 2147483647,
   jsSrc: 'https://apis.google.com/js/api.js'
 }

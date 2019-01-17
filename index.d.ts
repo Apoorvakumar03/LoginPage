@@ -57,7 +57,8 @@ export interface GoogleLoginResponseOffline {
 
 export interface GoogleLoginProps {
   readonly onSuccess: (response: GoogleLoginResponse | GoogleLoginResponseOffline) => void,
-  readonly onAuthReload?: (response: GoogleLoginResponse | GoogleLoginResponseOffline) => void,
+  readonly onAuthReloadSuccess?: (response: GoogleLoginResponse | GoogleLoginResponseOffline) => void,
+  readonly onAuthReloadFailure?: (response: object) => void,
   readonly authReloadInterval?: number,
   readonly onFailure: (error: any) => void,
   readonly clientId: string,
