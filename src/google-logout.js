@@ -55,9 +55,6 @@ class GoogleLogout extends Component {
                 err => onFailure(err)
               );
             }
-            if (autoLoad) {
-              this.signIn();
-            }
           });
     })
   }
