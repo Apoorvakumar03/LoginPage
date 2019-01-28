@@ -43,6 +43,7 @@ ReactDOM.render(
     buttonText="Login"
     onSuccess={responseGoogle}
     onFailure={responseGoogle}
+    cookiePolicy={'single_host_origin'}
   />,
   document.getElementById('googleButton')
 );
