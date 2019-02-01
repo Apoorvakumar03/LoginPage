@@ -84,9 +84,11 @@ class GoogleLogin extends Component {
       })
     })
 
-    window.setInterval(() => {
-      this.reloadAuthToken()
-    }, authReloadInterval)
+    if (authReloadInterval > 0) {
+      window.setInterval(() => {
+        this.reloadAuthToken()
+      }, authReloadInterval)
+    }
   }
   componentWillUnmount() {
     this.enableButton = () => {}
@@ -286,7 +288,7 @@ GoogleLogin.defaultProps = {
   onRequest: () => {},
   onAuthReloadSuccess: () => {},
   onAuthReloadFailure: () => {},
-  authReloadInterval: 2147483647,
+  authReloadInterval: 0,
   jsSrc: 'https://apis.google.com/js/api.js'
 }
 
