@@ -85,13 +85,16 @@ class GoogleLogin extends Component {
     })
 
     if (authReloadInterval > 0) {
-      window.setInterval(() => {
+      this.authReloadIntervalHandle = window.setInterval(() => {
         this.reloadAuthToken()
       }, authReloadInterval)
     }
   }
   componentWillUnmount() {
     this.enableButton = () => {}
+    if (this.props.authReloadInterval > 0) {
+      window.clearInterval(this.authReloadIntervalHandle)
+    }
   }
   enableButton() {
     this.setState({
