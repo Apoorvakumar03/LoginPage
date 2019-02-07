@@ -56,6 +56,33 @@ class GoogleLogout extends Component {
               );
             }
           });
+
+      const params = {
+        client_id: clientId,
+        cookie_policy: cookiePolicy,
+        login_hint: loginHint,
+        hosted_domain: hostedDomain,
+        fetch_basic_profile: fetchBasicProfile,
+        discoveryDocs,
+        ux_mode: uxMode,
+        redirect_uri: redirectUri,
+        scope,
+        access_type: accessType
+      }
+      window.gapi.load('auth2', () => {
+        this.enableButton()
+        if (!window.gapi.auth2.getAuthInstance()) {
+          window.gapi.auth2.init(params).then(
+            res => {
+              if (isSignedIn && res.isSignedIn.get()) {
+                this.handleSigninSuccess(res.currentUser.get())
+              }
+            },
+            err => onFailure(err)
+          )
+        }
+      })
+
     })
   }
   componentWillUnmount() {
@@ -68,11 +95,9 @@ class GoogleLogout extends Component {
   }
   signOut() {
     if (window.gapi) {
-      const auth2 = window.gapi.auth2.getAuthInstance();
+      const auth2 = window.gapi.auth2.getAuthInstance()
       if (auth2 != null) {
-        auth2
-          .signOut()
-          .then(auth2.disconnect().then(this.props.onLogoutSuccess));
+        auth2.signOut().then(auth2.disconnect().then(this.props.onLogoutSuccess))
       }
     }
   }
@@ -157,7 +182,7 @@ class GoogleLogout extends Component {
 
 GoogleLogout.propTypes = {
   jsSrc: PropTypes.string,
-  buttonText: PropTypes.string,
+  buttonText: PropTypes.node,
   className: PropTypes.string,
   children: PropTypes.node,
   disabledStyle: PropTypes.object,
