@@ -89,6 +89,7 @@ export class GoogleLogin extends Component<GoogleLoginProps, {}> {
 }
 
 export interface GoogleLogoutProps {
+  readonly clientId: string,
   readonly onLogoutSuccess?: () => void;
   readonly buttonText?: string;
   readonly className?: string;
