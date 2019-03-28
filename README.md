@@ -39,7 +39,9 @@ ReactDOM.render(
   <GoogleLogin
     clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
     render={renderProps => (
-      <button onClick={renderProps.onClick}>This is my custom Google button</button>
+      <button onClick={renderProps.onClick} disabled={renderProps.loading}>
+        This is my custom Google button
+      </button>
     )}
     buttonText="Login"
     onSuccess={responseGoogle}
@@ -105,7 +107,7 @@ Use GoogleLogout button to logout the user from google.
 | redirectUri       |  string  |  -   | If using ux_mode='redirect', this parameter allows you to override the default redirect_uri that will be used at the end of the consent flow. The default redirect_uri is the current URL stripped of query parameters and hash fragment. |
 | isSignedIn | boolean | false | If true will return GoogleUser object on load, if user has given your app permission |
 Google Scopes List: [scopes](https://developers.google.com/identity/protocols/googlescopes)
-| render       | function | -                                     | Render prop to use a custom element, use renderProps.onClick |
+| render       | function | -                                     | Render prop to use a custom element, use renderProps.onClick and renderProps.loading |
 
 ## onSuccess callback ( w/ offline false)
 
