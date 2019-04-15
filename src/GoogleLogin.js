@@ -91,15 +91,27 @@ class GoogleLogin extends Component {
     }
     if (!this.state.disabled) {
       const auth2 = window.gapi.auth2.getAuthInstance()
-      const { onSuccess, onRequest, onFailure, prompt, responseType } = this.props
+      const {
+        onSuccess,
+        onRequest,
+        onFailure,
+        prompt,
+        responseType,
+        loginHint
+      } = this.props
       const options = {
-        prompt
+        prompt,
+        login_hint: loginHint
       }
       onRequest()
       if (responseType === 'code') {
-        auth2.grantOfflineAccess(options).then(res => onSuccess(res), err => onFailure(err))
+        auth2
+          .grantOfflineAccess(options)
+          .then(res => onSuccess(res), err => onFailure(err))
       } else {
-        auth2.signIn(options).then(res => this.handleSigninSuccess(res), err => onFailure(err))
+        auth2
+          .signIn(options)
+          .then(res => this.handleSigninSuccess(res), err => onFailure(err))
       }
     }
   }
@@ -125,7 +137,16 @@ class GoogleLogin extends Component {
   }
 
   render() {
-    const { tag, type, style, className, disabledStyle, buttonText, children, render } = this.props
+    const {
+      tag,
+      type,
+      style,
+      className,
+      disabledStyle,
+      buttonText,
+      children,
+      render
+    } = this.props
     const disabled = this.state.disabled || this.props.disabled
 
     if (render) {
