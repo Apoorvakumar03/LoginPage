@@ -94,6 +94,7 @@ Use GoogleLogout button to logout the user from google.
 | disabledStyle|  object  |                   -                  |                  |
 |   loginHint  |  string  |                   -                  |                  |
 |    prompt    |  string  |                   -                  |                  |
+|approvalPrompt|  string  |                   -                  | Can be 'force' if to show the scope approval screen. Generally used with 'accessType=offline' to get a new refresh_token. |
 |     tag      |  string  |                button                |  sets element tag (div, a, span, etc     |
 |     type      |  string  |               button                |sets button type (submit || button)     |
 |   autoLoad   |  boolean |                 false                |                  |

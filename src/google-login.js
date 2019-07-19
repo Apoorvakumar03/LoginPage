@@ -32,7 +32,8 @@ class GoogleLogin extends Component {
       scope,
       accessType,
       responseType,
-      jsSrc
+      jsSrc,
+      approvalPrompt,
     } = this.props
 
     loadScript(document, 'script', 'google-login', jsSrc, () => {
@@ -46,7 +47,8 @@ class GoogleLogin extends Component {
         ux_mode: uxMode,
         redirect_uri: redirectUri,
         scope,
-        access_type: accessType
+        access_type: accessType,
+        approval_prompt: approvalPrompt,
       }
 
       if (responseType === 'code') {
@@ -72,7 +74,7 @@ class GoogleLogin extends Component {
     })
   }
   componentWillUnmount() {
-    this.enableButton = () => {}
+    this.enableButton = () => { }
     const el = document.getElementById('google-login')
     el.parentNode.removeChild(el)
   }
@@ -226,7 +228,8 @@ GoogleLogin.propTypes = {
   accessType: PropTypes.string,
   render: PropTypes.func,
   theme: PropTypes.string,
-  icon: PropTypes.bool
+  icon: PropTypes.bool,
+  approvalPrompt: PropTypes.string,
 }
 
 GoogleLogin.defaultProps = {
@@ -245,7 +248,7 @@ GoogleLogin.defaultProps = {
   },
   icon: true,
   theme: 'light',
-  onRequest: () => {},
+  onRequest: () => { },
   jsSrc: 'https://apis.google.com/js/api.js'
 }
 
