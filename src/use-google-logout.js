@@ -44,10 +44,7 @@ const useGoogleLogout = ({
       }
       window.gapi.load('auth2', () => {
         if (!window.gapi.auth2.getAuthInstance()) {
-          window.gapi.auth2.init(params).then(
-            () => setLoaded(true),
-            err => onFailure(err)
-          )
+          window.gapi.auth2.init(params).then(() => setLoaded(true), err => onFailure(err))
         } else {
           setLoaded(true)
         }
