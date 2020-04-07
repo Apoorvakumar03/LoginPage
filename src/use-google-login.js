@@ -56,14 +56,21 @@ const useGoogleLogin = ({
       }
       onRequest()
       if (responseType === 'code') {
-        auth2.grantOfflineAccess(options).then(res => onSuccess(res), err => onFailure(err))
+        auth2.grantOfflineAccess(options).then(
+          res => onSuccess(res),
+          err => onFailure(err)
+        )
       } else {
-        auth2.signIn(options).then(res => handleSigninSuccess(res), err => onFailure(err))
+        auth2.signIn(options).then(
+          res => handleSigninSuccess(res),
+          err => onFailure(err)
+        )
       }
     }
   }
 
   useEffect(() => {
+    let unmounted = false
     loadScript(document, 'script', 'google-login', jsSrc, () => {
       const params = {
         client_id: clientId,
@@ -86,20 +93,23 @@ const useGoogleLogin = ({
         if (!window.gapi.auth2.getAuthInstance()) {
           window.gapi.auth2.init(params).then(
             res => {
-              setLoaded(true)
-              if (isSignedIn && res.isSignedIn.get()) {
-                handleSigninSuccess(res.currentUser.get())
+              if (!unmounted) {
+                setLoaded(true)
+                if (isSignedIn && res.isSignedIn.get()) {
+                  handleSigninSuccess(res.currentUser.get())
+                }
               }
             },
             err => onFailure(err)
           )
-        } else {
+        } else if (!unmounted) {
           setLoaded(true)
         }
       })
     })
 
     return () => {
+      unmounted = true
       removeScript(document, 'google-login')
     }
   }, [])
