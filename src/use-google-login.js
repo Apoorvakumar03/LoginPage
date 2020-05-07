@@ -110,8 +110,8 @@ const useGoogleLogin = ({
             }
           )
         } else if (isSignedIn && window.gapi.auth2.isSignedIn.get()) {
-          onAutoLoadFinished(isSignedIn && window.gapi.auth2.isSignedIn.get())
-          this.handleSigninSuccess(window.gapi.auth2.currentUser.get())
+          onAutoLoadFinished(true)
+          handleSigninSuccess(window.gapi.auth2.currentUser.get())
         } else if (!unmounted) {
           setLoaded(true)
           onAutoLoadFinished(false)
