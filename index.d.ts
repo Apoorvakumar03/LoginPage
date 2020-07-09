@@ -43,6 +43,7 @@ export interface GoogleLoginResponse {
   tokenObj: AuthResponse;
   tokenId: string;
   accessToken: string;
+  readonly code?: string;//does not exist but here to satisfy typescript compatibility
   profileObj: {
     googleId: string;
     imageUrl: string;
