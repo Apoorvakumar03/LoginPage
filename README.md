@@ -53,6 +53,37 @@ ReactDOM.render(
 );
 ```
 
+## How to used dotenv
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+import GoogleLogin from 'react-google-login';
+// or
+import { GoogleLogin } from 'react-google-login';
+
+
+const responseGoogle = (response) => {
+  console.log(response);
+}
+
+ReactDOM.render(
+  <GoogleLogin
+    clientId="{process.env.REACT_APP_ENV_NAME}"
+    // REACT_APP is required to use embedded env.
+    buttonText="Login"
+    onSuccess={responseGoogle}
+    onFailure={responseGoogle}
+    cookiePolicy={'single_host_origin'}
+  />,
+  document.getElementById('googleButton')
+);
+```
+
+### Set a file .env
+```
+ENV_NAME = 658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com
+```
+
 ## Stay Logged in
 `isSignedIn={true}` attribute will call `onSuccess` callback on load to keep the user signed in.
 ```jsx
@@ -109,6 +140,7 @@ const { signOut, loaded } = useGoogleLogout({
     onLogoutSuccess
   })
 ```
+
 ## onSuccess callback
 
 If responseType is not 'code', callback will return the GoogleAuth object.
@@ -139,7 +171,7 @@ Use GoogleLogout button to logout the user from google.
 
 |    params    |   value  |             default value            |   description    |
 |:------------:|:--------:|:------------------------------------:|:----------------:|
-|    clientId  |  string  |               REQUIRED               | You can create a clientID by creating a [new project on Google developers website.](https://developers.google.com/identity/sign-in/web/sign-in) |
+|    clientId  |  ReactNode, string  |               REQUIRED               | You can create a clientID by creating a [new project on Google developers website.](https://developers.google.com/identity/sign-in/web/sign-in) |
 |    jsSrc     |  string  |https://apis.google.com/js/api.js|URL of the Javascript file normally hosted by Google|
 | hostedDomain |  string  |                   -                  |The G Suite domain to which users must belong to sign in|
 |     scope    |  string  |             profile email            |                  |
