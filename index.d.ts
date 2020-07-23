@@ -76,7 +76,7 @@ export interface GoogleLoginProps {
   readonly onAutoLoadFinished?: (successLogin: boolean) => void,
   readonly onFailure?: (error: any) => void,
   readonly onRequest?: () => void,
-  readonly clientId: string,
+  readonly clientId: ReactNode | string,
   readonly jsSrc?: string,
   readonly buttonText?: string,
   readonly scope?: string,
