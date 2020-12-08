@@ -11,7 +11,12 @@ const GoogleLogout = props => {
     tag,
     type,
     className,
-    disabledStyle,
+    disabledStyle: customDisabledStyle,
+    style: customInitialStyle,
+    activeStyle: customActiveStyle,
+    hoveredStyle: customHoveredStyle,
+    iconStyle,
+    childrenStyle,
     buttonText,
     children,
     render,
@@ -54,6 +59,10 @@ const GoogleLogout = props => {
     return render({ onClick: signOut, disabled })
   }
 
+  const disabledStyle = {
+    opacity: 0.6
+  };
+
   const initialStyle = {
     backgroundColor: theme === 'dark' ? 'rgb(66, 133, 244)' : '#fff',
     display: 'inline-flex',
@@ -82,19 +91,19 @@ const GoogleLogout = props => {
 
   const defaultStyle = (() => {
     if (disabled) {
-      return Object.assign({}, initialStyle, disabledStyle)
+      return {...initialStyle, ...customInitialStyle, ...disabledStyle, ...customDisabledStyle}
     }
 
     if (active) {
       if (theme === 'dark') {
-        return Object.assign({}, initialStyle, activeStyle)
+        return {...initialStyle, ...customInitialStyle, ...activeStyle, ...customActiveStyle}
       }
 
-      return Object.assign({}, initialStyle, activeStyle)
+      return {...initialStyle, ...customInitialStyle, ...activeStyle, ...customActiveStyle}
     }
 
     if (hovered) {
-      return Object.assign({}, initialStyle, hoveredStyle)
+      return {...initialStyle, ...customInitialStyle, ...hoveredStyle, ...customHoveredStyle}
     }
 
     return initialStyle
@@ -116,8 +125,8 @@ const GoogleLogout = props => {
       className
     },
     [
-      icon && <Icon key={1} active={active} />,
-      <ButtonContent icon={icon} key={2}>
+      icon && <Icon key={1} active={active} style={iconStyle} />,
+      <ButtonContent icon={icon} key={2} style={childrenStyle}>
         {children || buttonText}
       </ButtonContent>
     ]
@@ -131,7 +140,12 @@ GoogleLogout.propTypes = {
   buttonText: PropTypes.node,
   className: PropTypes.string,
   children: PropTypes.node,
+  style: PropTypes.object,
   disabledStyle: PropTypes.object,
+  activeStyle: PropTypes.object,
+  hoveredStyle: PropTypes.object,
+  iconStyle: PropTypes.object,
+  childrenStyle: PropTypes.object,
   tag: PropTypes.string,
   disabled: PropTypes.bool,
   onLogoutSuccess: PropTypes.func,
@@ -145,9 +159,12 @@ GoogleLogout.defaultProps = {
   type: 'button',
   tag: 'button',
   buttonText: 'Logout of Google',
-  disabledStyle: {
-    opacity: 0.6
-  },
+  style: {},
+  disabledStyle: {},
+  activeStyle: {},
+  hoveredStyle: {},
+  iconStyle: {},
+  childrenStyle: {},
   icon: true,
   theme: 'light',
   jsSrc: 'https://apis.google.com/js/api.js'

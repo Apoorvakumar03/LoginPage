@@ -153,6 +153,10 @@ Use GoogleLogout button to logout the user from google.
 |   className  |  string  |                   -                  |                  |
 |    style     |  object  |                   -                  |                  |
 | disabledStyle|  object  |                   -                  |                  |
+| activeStyle  |  object  |                   -                  |                  |
+| hoveredStyle |  object  |                   -                  |                  |
+|   iconStyle  |  object  |                   -                  |                  |
+| childrenStyle|  object  |                   -                  |                  |
 |   loginHint  |  string  |                   -                  |                  |
 |    prompt    |  string  |                   -                  | Can be 'consent' to force google return refresh token.                |
 |     tag      |  string  |                button                |  sets element tag (div, a, span, etc     |
