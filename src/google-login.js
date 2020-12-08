@@ -119,7 +119,7 @@ const GoogleLogin = props => {
       return {...initialStyle, ...customInitialStyle, ...hoveredStyle, ...customHoveredStyle}
     }
 
-    return initialStyle
+    return { ...initialStyle, ...customInitialStyle }
   })()
   const googleLoginButton = React.createElement(
     tag,

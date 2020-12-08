@@ -106,7 +106,7 @@ const GoogleLogout = props => {
       return {...initialStyle, ...customInitialStyle, ...hoveredStyle, ...customHoveredStyle}
     }
 
-    return initialStyle
+    return { ...initialStyle, ...customInitialStyle }
   })()
   const GoogleLogoutButton = React.createElement(
     tag,
