@@ -27,6 +27,7 @@ const GoogleLogout = props => {
     redirectUri,
     discoveryDocs,
     onFailure,
+    onScriptLoadFailure,
     uxMode,
     scope,
     accessType,
@@ -36,6 +37,7 @@ const GoogleLogout = props => {
   const { signOut, loaded } = useGoogleLogout({
     jsSrc,
     onFailure,
+    onScriptLoadFailure,
     clientId,
     cookiePolicy,
     loginHint,
