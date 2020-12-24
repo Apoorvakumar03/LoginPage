@@ -72,6 +72,7 @@ const useGoogleLogin = ({
   }
 
   useEffect(() => {
+    if (!clientId) return
     let unmounted = false
     const onLoadFailure = onScriptLoadFailure || onFailure
     loadScript(
@@ -148,7 +149,7 @@ const useGoogleLogin = ({
       unmounted = true
       removeScript(document, 'google-login')
     }
-  }, [])
+  }, [clientId])
 
   useEffect(() => {
     if (autoLoad) {
