@@ -73,7 +73,7 @@ const useGoogleLogin = ({
 
   useEffect(() => {
     if (!clientId) {
-      return null
+      return () => null
     }
     let unmounted = false
     const onLoadFailure = onScriptLoadFailure || onFailure
