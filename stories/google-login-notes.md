@@ -71,6 +71,7 @@ If you use the hostedDomain param, make sure to validate the id_token (a JSON we
 | disabledStyle|  object  |                   -                  |                  |
 |   loginHint  |  string  |                   -                  |                  |
 |    prompt    |  string  |                   -                  |                  |
+|    state     |  string  |                   -                  | sets round trip state opaque string |
 |     tag      |  string  |                button                |  sets element tag (div, a, span, etc     |
 |     type      |  string  |               button                |sets button type (submit || button)     |
 |   autoLoad   |  boolean |                 false                |                  |

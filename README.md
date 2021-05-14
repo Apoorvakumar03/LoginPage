@@ -86,7 +86,8 @@ const { signIn, loaded } = useGoogleLogin({
     responseType,
     jsSrc,
     onRequest,
-    prompt
+    prompt,
+    state
   })
 ```
 ## Logout Hook
@@ -156,6 +157,7 @@ Use GoogleLogout button to logout the user from google.
 | disabledStyle|  object  |                   -                  |                  |
 |   loginHint  |  string  |                   -                  |                  |
 |    prompt    |  string  |                   -                  | Can be 'consent' to force google return refresh token.                |
+|    state     |  string  |                   -                  | Round trip opaque data for application use |
 |     tag      |  string  |                button                |  sets element tag (div, a, span, etc     |
 |     type      |  string  |               button                |sets button type (submit || button)     |
 |   autoLoad   |  boolean |                 false                |                  |

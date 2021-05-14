@@ -22,7 +22,8 @@ const useGoogleLogin = ({
   accessType,
   responseType,
   jsSrc = 'https://apis.google.com/js/api.js',
-  prompt
+  prompt,
+  state
 }) => {
   const [loaded, setLoaded] = useState(false)
 
@@ -54,7 +55,8 @@ const useGoogleLogin = ({
     if (loaded) {
       const GoogleAuth = window.gapi.auth2.getAuthInstance()
       const options = {
-        prompt
+        prompt,
+        state
       }
       onRequest()
       if (responseType === 'code') {
