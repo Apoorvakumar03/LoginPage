@@ -71,10 +71,15 @@ export interface GoogleLoginResponseOffline {
   readonly code: string;
 }
 
+export interface GoogleAuthError {
+  error: string;
+  description?: string;
+}
+
 export interface GoogleLoginProps {
   readonly onSuccess?: (response: GoogleLoginResponse | GoogleLoginResponseOffline) => void,
   readonly onAutoLoadFinished?: (successLogin: boolean) => void,
-  readonly onFailure?: (error: any) => void,
+  readonly onFailure?: (authError: GoogleAuthError) => void,
   readonly onScriptLoadFailure?: (error: any) => void,
   readonly onRequest?: () => void,
   readonly clientId: string,
@@ -111,7 +116,7 @@ export class GoogleLogin extends Component<GoogleLoginProps, unknown> {
 export interface GoogleLogoutProps {
   readonly clientId: string,
   readonly onLogoutSuccess?: () => void;
-  readonly onFailure?: () => void;
+  readonly onFailure?: (authError: GoogleAuthError) => void;
   readonly buttonText?: string;
   readonly className?: string;
   readonly children?: ReactNode;
@@ -136,7 +141,7 @@ export interface UseGoogleLogoutResponse {
 export interface UseGoogleLogoutProps { 
   readonly clientId: string,
   readonly onLogoutSuccess?: () => void;
-  readonly onFailure?: () => void;
+  readonly onFailure?: (authError: GoogleAuthError) => void;
   readonly accessType?: string;
   readonly fetchBasicProfile?: boolean;
   readonly cookiePolicy?: string;
@@ -158,7 +163,7 @@ export interface UseGoogleLoginResponse {
 
 export interface UseGoogleLoginProps { 
   readonly onSuccess?: (response: GoogleLoginResponse | GoogleLoginResponseOffline) => void,
-  readonly onFailure?: (error: any) => void,
+  readonly onFailure?: (authError: GoogleAuthError) => void,
   readonly onScriptLoadFailure?: (error: any) => void,
   readonly onAutoLoadFinished?: (successLogin: boolean) => void,
   readonly clientId: string,
