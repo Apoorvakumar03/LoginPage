@@ -17,6 +17,7 @@ const GoogleLogin = props => {
     type,
     className,
     disabledStyle,
+    style,
     buttonText,
     children,
     render,
@@ -80,6 +81,11 @@ const GoogleLogin = props => {
     fontSize: 14,
     fontWeight: '500',
     fontFamily: 'Roboto, sans-serif'
+  }
+  if (style) {
+    Object.keys(style).forEach(key => {
+      initialStyle[key] = style[key]
+    })
   }
 
   const hoveredStyle = {
