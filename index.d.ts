@@ -1,11 +1,12 @@
 /* eslint-disable max-classes-per-file */
-// Type definitions for react-google-login v2.5.4
+// Type definitions for react-google-login v5.2
 // Project: https://github.com/anthonyjgrove/react-google-login
 // Definitions by: Ruslan Ibragimov <https://github.com/IRus>
 import {Component, ReactNode, CSSProperties} from 'react';
 
 export as namespace ReactGoogleLogin;
 
+// https://developers.google.com/identity/sign-in/web/reference#gapiauth2authresponse
 interface AuthResponse {
   readonly access_token: string;
   readonly id_token: string;
@@ -44,7 +45,6 @@ export interface GoogleLoginResponse {
   tokenObj: AuthResponse;
   tokenId: string;
   accessToken: string;
-  readonly code?: string;//does not exist but here to satisfy typescript compatibility
   profileObj: {
     googleId: string;
     imageUrl: string;
@@ -71,8 +71,8 @@ export interface GoogleLoginResponseOffline {
   readonly code: string;
 }
 
-export interface GoogleLoginProps {
-  readonly onSuccess?: (response: GoogleLoginResponse | GoogleLoginResponseOffline) => void,
+export interface GoogleLoginProps<T> {
+  readonly onSuccess?: T extends 'code' ? (response: GoogleLoginResponseOffline) => void : (response: GoogleLoginResponse) => void,
   readonly onAutoLoadFinished?: (successLogin: boolean) => void,
   readonly onFailure?: (error: any) => void,
   readonly onScriptLoadFailure?: (error: any) => void,
@@ -87,7 +87,7 @@ export interface GoogleLoginProps {
   readonly loginHint?: string,
   readonly hostedDomain?: string,
   readonly prompt?: string,
-  readonly responseType?: string,
+  readonly responseType?: 'code' | T,
   readonly children?: ReactNode,
   readonly style?: CSSProperties,
   readonly icon?: boolean,
@@ -104,7 +104,7 @@ export interface GoogleLoginProps {
   readonly render?: (props: { onClick: () => void, disabled?: boolean }) => JSX.Element;
 }
 
-export class GoogleLogin extends Component<GoogleLoginProps, unknown> {
+export class GoogleLogin<T extends string> extends Component<GoogleLoginProps<T>, unknown> {
   public signIn(e?: Event): void;
 }
 
@@ -156,8 +156,8 @@ export interface UseGoogleLoginResponse {
   loaded: boolean;
 }
 
-export interface UseGoogleLoginProps { 
-  readonly onSuccess?: (response: GoogleLoginResponse | GoogleLoginResponseOffline) => void,
+export interface UseGoogleLoginProps<T> { 
+  readonly onSuccess?: T extends 'code' ? (response: GoogleLoginResponseOffline) => void : (response: GoogleLoginResponse) => void,
   readonly onFailure?: (error: any) => void,
   readonly onScriptLoadFailure?: (error: any) => void,
   readonly onAutoLoadFinished?: (successLogin: boolean) => void,
@@ -170,7 +170,7 @@ export interface UseGoogleLoginProps {
   readonly loginHint?: string,
   readonly hostedDomain?: string,
   readonly prompt?: string,
-  readonly responseType?: string,
+  readonly responseType?: 'code' | T,
   readonly autoLoad?: boolean;
   readonly uxMode?: string;
   readonly fetchBasicProfile?: boolean;
@@ -179,6 +179,6 @@ export interface UseGoogleLoginProps {
   readonly accessType?: string;
 }
 
-export function useGoogleLogin(input: UseGoogleLoginProps): UseGoogleLoginResponse;
+export function useGoogleLogin<T extends string>(input: UseGoogleLoginProps<T>): UseGoogleLoginResponse;
 
 export default GoogleLogin;
