@@ -4,6 +4,16 @@ import useGoogleLogin from './use-google-login'
 import ButtonContent from './button-content'
 import Icon from './icon'
 
+export const addKeysTo = (targetObj, fromObj) => {
+  if (fromObj) {
+    // Copy object reference to prevent assigning to function parameter.
+    const referenceObjCopy = targetObj
+    Object.keys(fromObj).forEach(key => {
+      referenceObjCopy[key] = fromObj[key]
+    })
+  }
+}
+
 const GoogleLogin = props => {
   const [hovered, setHovered] = useState(false)
   const [active, setActive] = useState(false)
@@ -18,6 +28,9 @@ const GoogleLogin = props => {
     className,
     disabledStyle,
     style,
+    activeStyle,
+    hoveredStyle,
+    iconStyle,
     buttonText,
     children,
     render,
@@ -82,23 +95,21 @@ const GoogleLogin = props => {
     fontWeight: '500',
     fontFamily: 'Roboto, sans-serif'
   }
-  if (style) {
-    Object.keys(style).forEach(key => {
-      initialStyle[key] = style[key]
-    })
-  }
+  addKeysTo(initialStyle, style)
 
-  const hoveredStyle = {
+  const buttonHoveredStyle = {
     cursor: 'pointer',
     opacity: 0.9
   }
+  addKeysTo(buttonHoveredStyle, hoveredStyle)
 
-  const activeStyle = {
+  const buttonActiveStyle = {
     cursor: 'pointer',
     backgroundColor: theme === 'dark' ? '#3367D6' : '#eee',
     color: theme === 'dark' ? '#fff' : 'rgba(0, 0, 0, .54)',
     opacity: 1
   }
+  addKeysTo(buttonActiveStyle, activeStyle)
 
   const defaultStyle = (() => {
     if (disabled) {
@@ -107,14 +118,14 @@ const GoogleLogin = props => {
 
     if (active) {
       if (theme === 'dark') {
-        return Object.assign({}, initialStyle, activeStyle)
+        return Object.assign({}, initialStyle, buttonActiveStyle)
       }
 
-      return Object.assign({}, initialStyle, activeStyle)
+      return Object.assign({}, initialStyle, buttonActiveStyle)
     }
 
     if (hovered) {
-      return Object.assign({}, initialStyle, hoveredStyle)
+      return Object.assign({}, initialStyle, buttonHoveredStyle)
     }
 
     return initialStyle
@@ -136,7 +147,7 @@ const GoogleLogin = props => {
       className
     },
     [
-      icon && <Icon key={1} active={active} />,
+      icon && <Icon key={1} active={active} iconStyle={iconStyle} />,
       <ButtonContent icon={icon} key={2}>
         {children || buttonText}
       </ButtonContent>
