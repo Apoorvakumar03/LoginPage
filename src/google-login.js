@@ -3,16 +3,7 @@ import PropTypes from 'prop-types'
 import useGoogleLogin from './use-google-login'
 import ButtonContent from './button-content'
 import Icon from './icon'
-
-export const addKeysTo = (targetObj, fromObj) => {
-  if (fromObj) {
-    // Copy object reference to prevent assigning to function parameter.
-    const referenceObjCopy = targetObj
-    Object.keys(fromObj).forEach(key => {
-      referenceObjCopy[key] = fromObj[key]
-    })
-  }
-}
+import addKeys from './add-keys'
 
 const GoogleLogin = props => {
   const [hovered, setHovered] = useState(false)
@@ -95,13 +86,13 @@ const GoogleLogin = props => {
     fontWeight: '500',
     fontFamily: 'Roboto, sans-serif'
   }
-  addKeysTo(initialStyle, style)
+  addKeys(initialStyle, style)
 
   const buttonHoveredStyle = {
     cursor: 'pointer',
     opacity: 0.9
   }
-  addKeysTo(buttonHoveredStyle, hoveredStyle)
+  addKeys(buttonHoveredStyle, hoveredStyle)
 
   const buttonActiveStyle = {
     cursor: 'pointer',
@@ -109,7 +100,7 @@ const GoogleLogin = props => {
     color: theme === 'dark' ? '#fff' : 'rgba(0, 0, 0, .54)',
     opacity: 1
   }
-  addKeysTo(buttonActiveStyle, activeStyle)
+  addKeys(buttonActiveStyle, activeStyle)
 
   const defaultStyle = (() => {
     if (disabled) {

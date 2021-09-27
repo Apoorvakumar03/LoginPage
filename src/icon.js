@@ -1,5 +1,5 @@
 import React from 'react'
-import { addKeysTo } from './google-login'
+import addKeys from './add-keys'
 
 export default ({ active, iconStyle }) => {
   const initialIconStyle = {
@@ -8,7 +8,7 @@ export default ({ active, iconStyle }) => {
     padding: 10,
     borderRadius: 2
   }
-  addKeysTo(initialIconStyle, iconStyle)
+  addKeys(initialIconStyle, iconStyle)
 
   return (
     <div style={initialIconStyle}>
