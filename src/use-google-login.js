@@ -26,7 +26,7 @@ const useGoogleLogin = ({
 }) => {
   const [loaded, setLoaded] = useState(false)
 
-  function handleSigninSuccess(res) {
+  function handleSignInSuccess(res) {
     /*
       offer renamed response keys to names that match use
     */
@@ -56,6 +56,12 @@ const useGoogleLogin = ({
       const options = {
         prompt
       }
+      // Add to the default scopes (email profile) the additional scopes required if passed via props
+      // Read more at https://developers.google.com/identity/sign-in/web/reference#gapiauth2offlineaccessoptions
+      if (scope) {
+        options.scope = scope
+      }
+
       onRequest()
       if (responseType === 'code') {
         GoogleAuth.grantOfflineAccess(options).then(
@@ -64,7 +70,7 @@ const useGoogleLogin = ({
         )
       } else {
         GoogleAuth.signIn(options).then(
-          res => handleSigninSuccess(res),
+          res => handleSignInSuccess(res),
           err => onFailure(err)
         )
       }
@@ -80,6 +86,7 @@ const useGoogleLogin = ({
       'google-login',
       jsSrc,
       () => {
+        // Not passing 'scope' to the params will use the default "email profile" scope.
         const params = {
           client_id: clientId,
           cookie_policy: cookiePolicy,
@@ -89,7 +96,6 @@ const useGoogleLogin = ({
           discoveryDocs,
           ux_mode: uxMode,
           redirect_uri: redirectUri,
-          scope,
           access_type: accessType
         }
 
@@ -107,7 +113,7 @@ const useGoogleLogin = ({
                   const signedIn = isSignedIn && res.isSignedIn.get()
                   onAutoLoadFinished(signedIn)
                   if (signedIn) {
-                    handleSigninSuccess(res.currentUser.get())
+                    handleSignInSuccess(res.currentUser.get())
                   }
                 }
               },
@@ -126,7 +132,7 @@ const useGoogleLogin = ({
                 if (isSignedIn && GoogleAuth.isSignedIn.get()) {
                   setLoaded(true)
                   onAutoLoadFinished(true)
-                  handleSigninSuccess(GoogleAuth.currentUser.get())
+                  handleSignInSuccess(GoogleAuth.currentUser.get())
                 } else {
                   setLoaded(true)
                   onAutoLoadFinished(false)
