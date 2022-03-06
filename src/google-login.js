@@ -100,10 +100,6 @@ const GoogleLogin = props => {
     }
 
     if (active) {
-      if (theme === 'dark') {
-        return Object.assign({}, initialStyle, activeStyle)
-      }
-
       return Object.assign({}, initialStyle, activeStyle)
     }
 
