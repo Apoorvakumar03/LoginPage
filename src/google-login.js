@@ -169,7 +169,8 @@ GoogleLogin.propTypes = {
   accessType: PropTypes.string,
   render: PropTypes.func,
   theme: PropTypes.string,
-  icon: PropTypes.bool
+  icon: PropTypes.bool,
+  pluginName: PropTypes.string
 }
 
 GoogleLogin.defaultProps = {
