@@ -4,7 +4,7 @@
 
 # React Google Login
 
-> A Google oAUth Sign-in / Log-in Component for React
+> A Google oAuth Sign-in / Log-in Component for React.
 
 ## Storybook
 
@@ -115,15 +115,15 @@ const { signOut, loaded } = useGoogleLogout({
 ```
 ## onSuccess callback
 
-If responseType is not 'code', callback will return the GoogleAuth object.
+If `responseType` is not `code`, callback will return the GoogleAuth object.
 
-If responseType is 'code', callback will return the authorization code that can
+If `responseType` is `code`, callback will return the authorization code that can
 be used to retrieve a refresh token from the server.
 
-If you use the hostedDomain param, make sure to validate the id_token (a JSON web token) returned by Google on your backend server:
- 1. In the `responseGoogle(response) {...}` callback function, you should get back a standard JWT located at `response.tokenId` or `res.getAuthResponse().id_token`
- 2. Send this token to your server (preferably as an `Authorization` header)
- 3. Have your server decode the id_token by using a common JWT library such as [jwt-simple](https://github.com/hokaccha/node-jwt-simple) or by sending a GET request to `https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=YOUR_TOKEN_HERE`
+If you use the `hostedDomain` param, make sure to validate the `id_token` (a JSON web token) returned by Google on your backend server:
+ 1. In the `responseGoogle(response) {...}` callback function, you should get back a standard JWT located at `response.tokenId` or `res.getAuthResponse().id_token`.
+ 2. Send this token to your server (preferably as an `Authorization` header).
+ 3. Have your server decode the `id_token` by using a common JWT library such as [jwt-simple](https://github.com/hokaccha/node-jwt-simple) or by sending a GET request to `https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=YOUR_TOKEN_HERE`.
  4. The returned decoded token should have an `hd` key equal to the hosted domain you'd like to restrict to.
 
 
@@ -144,14 +144,14 @@ Use GoogleLogout button to logout the user from google.
 |    params    |   value  |             default value            |   description    |
 |:------------:|:--------:|:------------------------------------:|:----------------:|
 |    clientId  |  string  |               REQUIRED               | You can create a clientID by creating a [new project on Google developers website.](https://developers.google.com/identity/sign-in/web/sign-in) |
-|    jsSrc     |  string  |https://apis.google.com/js/api.js|URL of the Javascript file normally hosted by Google|
-| hostedDomain |  string  |                   -                  |The G Suite domain to which users must belong to sign in|
+|    jsSrc     |  string  |https://apis.google.com/js/api.js|URL of the Javascript file normally hosted by Google.|
+| hostedDomain |  string  |                   -                  |The G Suite domain to which users must belong to sign in.|
 |     scope    |  string  |             profile email            |                  |
 | responseType |  string  |              permission              | Can be either space-delimited 'id_token', to retrieve an ID Token + 'permission' (or 'token'), to retrieve an Access Token, or 'code', to retrieve an Authorization Code.
-| accessType   |  string  |              online                  | Can be either 'online' or 'offline'. Use offline with responseType 'code' to retrieve an authorization code for fetching a refresh token  |
+| accessType   |  string  |              online                  | Can be either 'online' or 'offline'. Use offline with responseType 'code' to retrieve an authorization code for fetching a refresh token.  |
 |   onSuccess  | function |               REQUIRED               |                  |
 |   onFailure  | function |               REQUIRED               |                  |
-|   onScriptLoadFailure  | function |         -                  | If defined, will be called when loading the 'google-login' script fails (otherwise onFailure will be called) |
+|   onScriptLoadFailure  | function |         -                  | If defined, will be called when loading the 'google-login' script fails (otherwise onFailure will be called). |
 |   onRequest  | function |                   -                  |                  |
 |   onAutoLoadFinished  | function |                   -         |                  |
 |   buttonText |  string  |             Login with Google        |                  |
@@ -160,18 +160,18 @@ Use GoogleLogout button to logout the user from google.
 | disabledStyle|  object  |                   -                  |                  |
 |   loginHint  |  string  |                   -                  |                  |
 |    prompt    |  string  |                   -                  | Can be 'consent' to force google return refresh token.                |
-|     tag      |  string  |                button                |  sets element tag (div, a, span, etc     |
+|     tag      |  string  |                button                |  sets element tag (div, a, span, etc.)     |
 |     type      |  string  |               button                |sets button type (submit || button)     |
 |   autoLoad   |  boolean |                 false                |                  |
 | fetchBasicProfile | boolean | true                            |                  |
 | disabled | boolean | false                            |                  |
 | discoveryDocs | - | https://developers.google.com/discovery/v1/using |
 | uxMode       |  string  |  popup   | The UX mode to use for the sign-in flow. Valid values are popup and redirect. |
-| theme | string | light | If set to `dark` the button will follow the Google brand guidelines for dark. Otherwise it will default to light (https://developers.google.com/identity/branding-guidelines) |
-| icon | boolean | true | Show (`true`) or hide (`false`) the Google Icon |
+| theme | string | light | If set to `dark` the button will follow the Google brand guidelines for dark. Otherwise it will default to light (https://developers.google.com/identity/branding-guidelines). |
+| icon | boolean | true | Show (`true`) or hide (`false`) the Google Icon. |
 | redirectUri       |  string  |  -   | If using ux_mode='redirect', this parameter allows you to override the default redirect_uri that will be used at the end of the consent flow. The default redirect_uri is the current URL stripped of query parameters and hash fragment. |
 | isSignedIn | boolean | false | If true will return GoogleUser object on load, if user has given your app permission |
-| render       | function | -                                     | Render prop to use a custom element, use renderProps.onClick |
+| render       | function | -                                     | Render prop to use a custom element, use `renderProps.onClick`. |
 Google Scopes List: [scopes](https://developers.google.com/identity/protocols/googlescopes)
 
 ## Logout Props
@@ -179,34 +179,34 @@ Google Scopes List: [scopes](https://developers.google.com/identity/protocols/go
 |    params    |   value  |             default value            |   description    |
 |:------------:|:--------:|:------------------------------------:|:----------------:|
 |    clientId  |  string  |               REQUIRED               | You can create a clientID by creating a [new project on Google developers website.](https://developers.google.com/identity/sign-in/web/sign-in) |
-|    jsSrc     |  string  | https://apis.google.com/js/api.js | URL of the Javascript file normally hosted by Google |
-| hostedDomain |  string  |                   -                  | The G Suite domain to which users must belong to sign in |
+|    jsSrc     |  string  | https://apis.google.com/js/api.js | URL of the Javascript file normally hosted by Google. |
+| hostedDomain |  string  |                   -                  | The G Suite domain to which users must belong to sign in. |
 |     scope    |  string  |             profile email            |                  |
-| accessType   |  string  |              online                  | Can be either 'online' or 'offline'. Use offline with responseType 'code' to retrieve an authorization code for fetching a refresh token |
+| accessType   |  string  |              online                  | Can be either 'online' or 'offline'. Use offline with responseType 'code' to retrieve an authorization code for fetching a refresh token. |
 |   onLogoutSuccess  | function |               REQUIRED               |                  |
 |   onFailure  | function |               REQUIRED               |                  |
-|   onScriptLoadFailure  | function |         -                  | If defined, will be called when loading the 'google-login' script fails (otherwise onFailure will be called) |
+|   onScriptLoadFailure  | function |         -                  | If defined, will be called when loading the 'google-login' script fails (otherwise onFailure will be called). |
 |   buttonText |  string  |             Logout of Google        |                  |
 |   className  |  string  |                   -                  |                  |
 | disabledStyle|  object  |                   -                  |                  |
 |   loginHint  |  string  |                   -                  |                  |
-|     tag      |  string  |                button                |  sets element tag (div, a, span, etc     |
+|     tag      |  string  |                button                |  sets element tag (div, a, span, etc.)     |
 |     type      |  string  |               button                |sets button type (submit || button)     |
 | fetchBasicProfile | boolean | true                            |                  |
 | disabled | boolean | false                            |                  |
 | discoveryDocs | - | https://developers.google.com/discovery/v1/using |
 | uxMode       |  string  |  popup   | The UX mode to use for the sign-in flow. Valid values are popup and redirect. |
-| theme | string | light | If set to `dark` the button will follow the Google brand guidelines for dark. Otherwise it will default to light (https://developers.google.com/identity/branding-guidelines) |
-| icon | boolean | true | Show (`true`) or hide (`false`) the Google Icon |
+| theme | string | light | If set to `dark` the button will follow the Google brand guidelines for dark. Otherwise it will default to light (https://developers.google.com/identity/branding-guidelines). |
+| icon | boolean | true | Show (`true`) or hide (`false`) the Google Icon. |
 | redirectUri       |  string  |  -   | If using ux_mode='redirect', this parameter allows you to override the default redirect_uri that will be used at the end of the consent flow. The default redirect_uri is the current URL stripped of query parameters and hash fragment. |
-| isSignedIn | boolean | false | If true will return GoogleUser object on load, if user has given your app permission |
-| render       | function | -                                     | Render prop to use a custom element, use renderProps.onClick |
+| isSignedIn | boolean | false | If true will return GoogleUser object on load, if user has given your app permission. |
+| render       | function | -                                     | Render prop to use a custom element, use `renderProps.onClick`. |
 Google Scopes List: [scopes](https://developers.google.com/identity/protocols/googlescopes)
 
 ## onSuccess callback ( w/ offline false)
 
-onSuccess callback returns a GoogleUser object which provides access
-to all of the GoogleUser methods listed here: https://developers.google.com/identity/sign-in/web/reference#users .
+`onSuccess` callback returns a `GoogleUser` object which provides access
+to all of the `GoogleUser` methods listed here: https://developers.google.com/identity/sign-in/web/reference#users.
 
 You can also access the returned values via the following properties on the returned object.
 
@@ -242,7 +242,7 @@ You can also pass child components such as icons into the button component.
 
 ## onFailure callback
 
-onFailure callback is called when either initialization or a signin attempt fails.
+`onFailure` callback is called when either initialization or a signin attempt fails.
 
 | property name |  value   |             definition               |
 |:-------------:|:--------:|:------------------------------------:|
@@ -255,9 +255,9 @@ Common error codes include:
 
 | error code | description |
 |:----------:|:-----------:|
-| `idpiframe_initialization_failed` | initialization of the Google Auth API failed (this will occur if a client doesn't have [third party cookies enabled](https://github.com/google/google-api-javascript-client/issues/260)) |
+| `idpiframe_initialization_failed` | Initialization of the Google Auth API failed (this will occur if a client doesn't have [third party cookies enabled](https://github.com/google/google-api-javascript-client/issues/260)). |
 | `popup_closed_by_user` | The user closed the popup before finishing the sign in flow.|
-| `access_denied` | The user denied the permission to the scopes required |
+| `access_denied` | The user denied the permission to the scopes required. |
 | `immediate_failed` | No user could be automatically selected without prompting the consent flow. |
 
 More details can be found in the official Google docs:
@@ -269,8 +269,8 @@ More details can be found in the official Google docs:
 ```
 npm run start
 ```
-Default dev server runs at localost:8080 in browser.
-You can set IP and PORT in webpack.config.dev.js
+Default dev server runs at `localost:8080` in browser.
+You can set `IP` and `PORT` in `webpack.config.dev.js`.
 
 ## Run Tests
 ```
