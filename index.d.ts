@@ -104,7 +104,7 @@ export interface GoogleLoginProps {
   readonly render?: (props: { onClick: () => void, disabled?: boolean }) => JSX.Element;
 }
 
-export class GoogleLogin extends Component<GoogleLoginProps, unknown> {
+export class GoogleLogin extends Component<GoogleLoginProps, {}> {
   public signIn(e?: Event): void;
 }
 
@@ -124,7 +124,7 @@ export interface GoogleLogoutProps {
   readonly render?: (props: { onClick: () => void, disabled?: boolean }) => JSX.Element;
 }
 
-export class GoogleLogout extends Component<GoogleLogoutProps, unknown> {
+export class GoogleLogout extends Component<GoogleLogoutProps, {}> {
   public signOut(): void;
 }
 
