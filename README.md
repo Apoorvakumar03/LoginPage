@@ -141,37 +141,37 @@ Use GoogleLogout button to logout the user from google.
   ```
 ## Login Props
 
-|    params    |   value  |             default value            |   description    |
-|:------------:|:--------:|:------------------------------------:|:----------------:|
-|    clientId  |  string  |               REQUIRED               | You can create a clientID by creating a [new project on Google developers website.](https://developers.google.com/identity/sign-in/web/sign-in) |
-|    jsSrc     |  string  |https://apis.google.com/js/api.js|URL of the Javascript file normally hosted by Google|
-| hostedDomain |  string  |                   -                  |The G Suite domain to which users must belong to sign in|
-|     scope    |  string  |             profile email            |                  |
-| responseType |  string  |              permission              | Can be either space-delimited 'id_token', to retrieve an ID Token + 'permission' (or 'token'), to retrieve an Access Token, or 'code', to retrieve an Authorization Code.
-| accessType   |  string  |              online                  | Can be either 'online' or 'offline'. Use offline with responseType 'code' to retrieve an authorization code for fetching a refresh token  |
-|   onSuccess  | function |               REQUIRED               |                  |
-|   onFailure  | function |               REQUIRED               |                  |
-|   onScriptLoadFailure  | function |         -                  | If defined, will be called when loading the 'google-login' script fails (otherwise onFailure will be called) |
-|   onRequest  | function |                   -                  |                  |
-|   onAutoLoadFinished  | function |                   -         |                  |
-|   buttonText |  string  |             Login with Google        |                  |
-|   className  |  string  |                   -                  |                  |
-|    style     |  object  |                   -                  |                  |
-| disabledStyle|  object  |                   -                  |                  |
-|   loginHint  |  string  |                   -                  |                  |
-|    prompt    |  string  |                   -                  | Can be 'consent' to force google return refresh token.                |
-|     tag      |  string  |                button                |  sets element tag (div, a, span, etc     |
-|     type      |  string  |               button                |sets button type (submit || button)     |
-|   autoLoad   |  boolean |                 false                |                  |
-| fetchBasicProfile | boolean | true                            |                  |
-| disabled | boolean | false                            |                  |
+|    params    |   value  |                  default value                   |                                                                                                                description                                                                                                                |
+|:------------:|:--------:|:------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|    clientId  |  string  |                     REQUIRED                     |                                              You can create a clientID by creating a [new project on Google developers website.](https://developers.google.com/identity/sign-in/web/sign-in)                                              |
+|    jsSrc     |  string  |        https://apis.google.com/js/api.js         |                                                                                           URL of the Javascript file normally hosted by Google                                                                                            |
+| hostedDomain |  string  |                        -                         |                                                                                         The G Suite domain to which users must belong to sign in                                                                                          |
+|     scope    |  string  |                  profile email                   |                                                 Base scopes requested, Passing `scope` prop will be added additionally to `profile email`. Passing none will request only `profile email`                                                 |
+| responseType |  string  |                    permission                    |                                 Can be either space-delimited 'id_token', to retrieve an ID Token + 'permission' (or 'token'), to retrieve an Access Token, or 'code', to retrieve an Authorization Code.                                 
+| accessType   |  string  |                      online                      |                                                 Can be either 'online' or 'offline'. Use offline with responseType 'code' to retrieve an authorization code for fetching a refresh token                                                  |
+|   onSuccess  | function |                     REQUIRED                     |                                                                                                                                                                                                                                           |
+|   onFailure  | function |                     REQUIRED                     |                                                                                                                                                                                                                                           |
+|   onScriptLoadFailure  | function |                        -                         |                                                               If defined, will be called when loading the 'google-login' script fails (otherwise onFailure will be called)                                                                |
+|   onRequest  | function |                        -                         |                                                                                                                                                                                                                                           |
+|   onAutoLoadFinished  | function |                        -                         |                                                                                                                                                                                                                                           |
+|   buttonText |  string  |                Login with Google                 |                                                                                                                                                                                                                                           |
+|   className  |  string  |                        -                         |                                                                                                                                                                                                                                           |
+|    style     |  object  |                        -                         |                                                                                                                                                                                                                                           |
+| disabledStyle|  object  |                        -                         |                                                                                                                                                                                                                                           |
+|   loginHint  |  string  |                        -                         |                                                                                                                                                                                                                                           |
+|    prompt    |  string  |                        -                         |                                                                                          Can be 'consent' to force google return refresh token.                                                                                           |
+|     tag      |  string  |                      button                      |                                                                                                    sets element tag (div, a, span, etc                                                                                                    |
+|     type      |  string  |                      button                      |                                                                                                         sets button type (submit                                                                                                          || button)     |
+|   autoLoad   |  boolean |                      false                       |                                                                                                                                                                                                                                           |
+| fetchBasicProfile | boolean |                       true                       |                                                                                                                                                                                                                                           |
+| disabled | boolean |                      false                       |                                                                                                                                                                                                                                           |
 | discoveryDocs | - | https://developers.google.com/discovery/v1/using |
-| uxMode       |  string  |  popup   | The UX mode to use for the sign-in flow. Valid values are popup and redirect. |
-| theme | string | light | If set to `dark` the button will follow the Google brand guidelines for dark. Otherwise it will default to light (https://developers.google.com/identity/branding-guidelines) |
-| icon | boolean | true | Show (`true`) or hide (`false`) the Google Icon |
-| redirectUri       |  string  |  -   | If using ux_mode='redirect', this parameter allows you to override the default redirect_uri that will be used at the end of the consent flow. The default redirect_uri is the current URL stripped of query parameters and hash fragment. |
-| isSignedIn | boolean | false | If true will return GoogleUser object on load, if user has given your app permission |
-| render       | function | -                                     | Render prop to use a custom element, use renderProps.onClick |
+| uxMode       |  string  |                      popup                       |                                                                               The UX mode to use for the sign-in flow. Valid values are popup and redirect.                                                                               |
+| theme | string |                      light                       |                               If set to `dark` the button will follow the Google brand guidelines for dark. Otherwise it will default to light (https://developers.google.com/identity/branding-guidelines)                               |
+| icon | boolean |                       true                       |                                                                                              Show (`true`) or hide (`false`) the Google Icon                                                                                              |
+| redirectUri       |  string  |                        -                         | If using ux_mode='redirect', this parameter allows you to override the default redirect_uri that will be used at the end of the consent flow. The default redirect_uri is the current URL stripped of query parameters and hash fragment. |
+| isSignedIn | boolean |                      false                       |                                                                           If true will return GoogleUser object on load, if user has given your app permission                                                                            |
+| render       | function |                        -                         |                                                                                       Render prop to use a custom element, use renderProps.onClick                                                                                        |
 Google Scopes List: [scopes](https://developers.google.com/identity/protocols/googlescopes)
 
 ## Logout Props
