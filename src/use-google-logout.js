@@ -38,6 +38,7 @@ const useGoogleLogout = ({
   }, [onLogoutSuccess])
 
   useEffect(() => {
+    let unmounted = false
     const onLoadFailure = onScriptLoadFailure || onFailure
     loadScript(
       document,
@@ -60,10 +61,14 @@ const useGoogleLogout = ({
         window.gapi.load('auth2', () => {
           if (!window.gapi.auth2.getAuthInstance()) {
             window.gapi.auth2.init(params).then(
-              () => setLoaded(true),
+              () => {
+                if (!unmounted) {
+                  setLoaded(true)
+                }
+              },
               err => onLoadFailure(err)
             )
-          } else {
+          } else if (!unmounted) {
             setLoaded(true)
           }
         })
@@ -74,6 +79,7 @@ const useGoogleLogout = ({
     )
 
     return () => {
+      unmounted = true
       removeScript(document, 'google-login')
     }
   }, [])
