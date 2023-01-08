@@ -156,8 +156,11 @@ Use GoogleLogout button to logout the user from google.
 |   onAutoLoadFinished  | function |                   -         |                  |
 |   buttonText |  string  |             Login with Google        |                  |
 |   className  |  string  |                   -                  |                  |
-|    style     |  object  |                   -                  |                  |
-| disabledStyle|  object  |                   -                  |                  |
+|    style     |  object  |                   -                  |         CSS properties to be set on the button         |
+|    hoveredStyle     |  object  |                   -                  |         Like `style`, but only set when the user hovers over the button         |
+|    activeStyle     |  object  |                   -                  |         Like `style`, but only set when the button is being clicked         |
+| disabledStyle|  object  |                   -                  |         Like `style`, but only set when the `disabled` prop is `true`         |
+|    iconStyle     |  object  |                   -                  |        CSS properties to be set on the `div` which wraps the Google logo. Only set when the `icon` prop is `true`          |
 |   loginHint  |  string  |                   -                  |                  |
 |    prompt    |  string  |                   -                  | Can be 'consent' to force google return refresh token.                |
 |     tag      |  string  |                button                |  sets element tag (div, a, span, etc     |
